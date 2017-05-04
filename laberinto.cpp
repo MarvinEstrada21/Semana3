@@ -8,10 +8,11 @@ using namespace std;
 char** createMatrix(int);
 //Función libera la memoria asignada a una matriz n x n
 void freeMatrix(int, char**);
-
-
 //Imprime la matriz en consola
 void printMatrix(int, char**);
+//Función para salir del laberinto
+void salirLaberinto(char**, int, int, int);
+
 
 int main (int argc, char* argv[]) {
 	char letra;
@@ -57,6 +58,43 @@ int main (int argc, char* argv[]) {
 	freeMatrix(size, matrix);
 
 	return 0;
+}
+
+//Salir del laberinto
+void salirLaberinto(char** matrix, int size, int x, int y){
+	if (y == size - 1){
+		cout << "Ha encontrado la salida del laberinto!" << endl;
+		return;
+	} else {
+		//Moverse hacia arriba
+		if (x > 1){
+			if (matrix[x - 1][y] == '.'){
+				matrix[x][y] = '*';
+				salirLaberinto(matrix, size, x - 1, y);
+			}
+		}
+		//Moverse hacia abajo
+		if (x < size - 1){
+			if (matrix[x + 1][y] == '.'){
+				matrix[x][y] = '*';
+				salirLaberinto(matrix, size, x + 1, y);
+			}
+		}
+		//Moverse a la izquierda
+		if (y > 0){
+			if (matrix[x][y - 1] == '.'){
+				matrix[x][y] = '*';
+				salirLaberinto(matrix, size, x, y - 1);
+			}
+		}
+		//Moverse a la derecha
+		if (y < size - 1){
+			if (matrix[x][y + 1] == '.'){
+				matrix[x][y] = '*';
+				salirLaberinto(matrix, size, x, y + 1);
+			}
+		}
+	}
 }
 
 //Imprimir una matriz
