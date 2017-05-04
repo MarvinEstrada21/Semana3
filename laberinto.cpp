@@ -53,7 +53,10 @@ int main (int argc, char* argv[]) {
 	//Imprimir laberinto
 	printMatrix(size, matrix);
 
-	//llamar funci�n SalirLaberinto
+	//llamar función SalirLaberinto
+	salirLaberinto(matrix, size, 1, 0);
+	printMatrix(size, matrix);
+
 	//Liberar Memoria
 	freeMatrix(size, matrix);
 
